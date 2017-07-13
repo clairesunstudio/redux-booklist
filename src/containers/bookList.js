@@ -1,13 +1,9 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 
-export default class BookList extends Component {
+class BookList extends Component {
   renderList() {
-    const books = [
-      {title: 'Harry Porter'},
-      {title: 'Javascript'},
-      {title: 'HTML & CSS'}
-    ]
-    return books.map((book) =>{
+    return this.props.books.map((book) =>{
       return(
         <li
         key={book.title}
@@ -25,3 +21,14 @@ export default class BookList extends Component {
     )
   }
 }
+
+function mapStateToProps(state){
+  //access to global state object
+  return {
+    books: state.books
+  }
+  //mapStateToProps function returns sliced state objects from the global state
+}
+
+export default connect(mapStateToProps)(BookList)
+//connect assign return value from the function (1st argument) to the Component (2nd argument) as props to a container
